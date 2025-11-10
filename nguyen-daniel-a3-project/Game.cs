@@ -24,11 +24,17 @@ namespace MohawkGame2D
             Window.SetTitle("Pong.");
             Window.SetSize(600, 400);
             Window.TargetFPS = 60;
+            Draw.FillColor = Color.White;
+            Draw.LineColor = Color.Clear;
+            Text.Color = Color.White;
             ball.BallSetup();
         }
 
         public Vector2 Scoring()
         {
+            Text.Draw($"{score.X}", Window.Width / 3, Window.Height / 8);
+            Text.Draw($"{score.Y}", Window.Width / 3 * 2, Window.Height / 8);
+
             if (ball.position.X <= 0)
             {
                 ball.BallSetup();
@@ -53,8 +59,6 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(Color.Black);
-            Draw.FillColor = Color.White;
-            Draw.LineColor = Color.Clear;
             ball.Balling();
             Scoring();
         }
