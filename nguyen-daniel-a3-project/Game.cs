@@ -14,9 +14,7 @@ namespace MohawkGame2D
         Ball ball = new Ball();
         Paddle paddle1 = new Paddle();
         Paddle paddle2 = new Paddle();
-
-        int player1Score = 0;
-        int player2Score = 0;
+        Vector2 score = Vector2.Zero;
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
@@ -29,6 +27,26 @@ namespace MohawkGame2D
             ball.BallSetup();
         }
 
+        public Vector2 Scoring()
+        {
+            if (ball.position.X <= 0)
+            {
+                ball.BallSetup();
+                score.Y++;
+                return score;
+            }
+            if (ball.position.X >= 600)
+            {
+                ball.BallSetup();
+                score.X++;
+                return score;
+            }
+            else
+            {
+                return score;
+            }
+        }
+
         /// <summary>
         ///     Update runs every frame.
         /// </summary>
@@ -38,6 +56,7 @@ namespace MohawkGame2D
             Draw.FillColor = Color.White;
             Draw.LineColor = Color.Clear;
             ball.Balling();
+            Scoring();
         }
     }
 
