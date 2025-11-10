@@ -35,13 +35,13 @@ namespace MohawkGame2D
             Text.Draw($"{score.X}", Window.Width / 3, Window.Height / 8);
             Text.Draw($"{score.Y}", Window.Width / 3 * 2, Window.Height / 8);
 
-            if (ball.position.X <= 0)
+            if (ball.position.X <= Window.Width / Window.Width - 1)
             {
                 ball.BallSetup();
                 score.Y++;
                 return score;
             }
-            if (ball.position.X >= 600)
+            if (ball.position.X >= Window.Width)
             {
                 ball.BallSetup();
                 score.X++;
