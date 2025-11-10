@@ -11,14 +11,21 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
+        Ball ball = new Ball();
+        Paddle paddle1 = new Paddle();
+        Paddle paddle2 = new Paddle();
 
+        int player1Score = 0;
+        int player2Score = 0;
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
         /// </summary>
         public void Setup()
         {
-
+            Window.SetTitle("Pong.");
+            Window.SetSize(400, 400);
+            Window.TargetFPS = 60;
         }
 
         /// <summary>
@@ -26,7 +33,10 @@ namespace MohawkGame2D
         /// </summary>
         public void Update()
         {
-
+            Window.ClearBackground(Color.Black);
+            Draw.FillColor = Color.White;
+            Draw.LineColor = Color.Clear;
+            ball.Balling();
         }
     }
 
