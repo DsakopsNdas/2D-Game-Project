@@ -8,8 +8,6 @@ namespace MohawkGame2D
     public class Ball
     {
         //variables
-        int veloX = 0;
-        int veloY = 0;
         Vector2 initPos;
         Vector2 position;
         Vector2 velocity = Vector2.Zero;
@@ -25,21 +23,20 @@ namespace MohawkGame2D
             
             if (upOrDown == true)
             {
-                veloY = 1;
+                velocity.Y = 1;
             }
             else
             {
-                veloY = -1;
+                velocity.Y = -1;
             }
             if (rightOrLeft == true)
             {
-                veloX = 1;
+                velocity.X = 1;
             }
             else
             {
-                veloX = -1;
+                velocity.X = -1;
             }
-            velocity = new Vector2(veloX, veloY);
         }
 
         //initial position needs to go in here so it gets the proper window width and height after the game has been setup
@@ -47,6 +44,23 @@ namespace MohawkGame2D
         {
             Draw.Circle(position, 5);
             position += velocity;
+
+            if (position.Y <= 0)
+            {
+                velocity.Y *= -1;
+            }
+            if (position.Y >= 400)
+            {
+                velocity.Y *= -1;
+            }
+            if (position.X <= 0)
+            {
+                velocity.X *= -1;
+            }
+            if (position.Y >= 400)
+            {
+                velocity.X *= -1;
+            }
         }
     }
 }
