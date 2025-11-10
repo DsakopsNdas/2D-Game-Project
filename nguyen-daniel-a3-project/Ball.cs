@@ -11,12 +11,13 @@ namespace MohawkGame2D
         Vector2 initPos;
         public Vector2 position;
         Vector2 velocity = Vector2.Zero;
+        public int radius = 5;
 
         //due to sequencing issues with initPos and position, i can't use a constructor and splitting things up too much makes it a headache
         public void BallSetup()
         {
             initPos = new Vector2(Window.Width / 2, Window.Height / 2);
-            Draw.Circle(initPos, 5);
+            Draw.Circle(initPos, radius);
             position = initPos;
 
             bool upOrDown = Random.Bool();
@@ -44,13 +45,13 @@ namespace MohawkGame2D
         public void Balling()
         {
             position += velocity;
-            Draw.Circle(position, 5);
+            Draw.Circle(position, radius);
 
-            if (position.Y <= 0)
+            if (position.Y - radius <= Window.Height / Window.Height - 1)
             {
                 velocity.Y *= -1;
             }
-            if (position.Y >= 400)
+            if (position.Y + radius >= Window.Height)
             {
                 velocity.Y *= -1;
             }

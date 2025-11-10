@@ -35,13 +35,13 @@ namespace MohawkGame2D
             Text.Draw($"{score.X}", Window.Width / 3, Window.Height / 8);
             Text.Draw($"{score.Y}", Window.Width / 3 * 2, Window.Height / 8);
 
-            if (ball.position.X <= Window.Width / Window.Width - 1)
+            if (ball.position.X + ball.radius <= Window.Width / Window.Width - 1)
             {
                 ball.BallSetup();
                 score.Y++;
                 return score;
             }
-            if (ball.position.X >= Window.Width)
+            if (ball.position.X - ball.radius >= Window.Width)
             {
                 ball.BallSetup();
                 score.X++;
@@ -51,6 +51,12 @@ namespace MohawkGame2D
             {
                 return score;
             }
+        }
+
+        public bool PaddleCollision()
+        {
+            bool collided = false;
+            return collided;
         }
 
         /// <summary>
