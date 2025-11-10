@@ -24,8 +24,9 @@ namespace MohawkGame2D
         public void Setup()
         {
             Window.SetTitle("Pong.");
-            Window.SetSize(400, 400);
+            Window.SetSize(600, 400);
             Window.TargetFPS = 60;
+            ball.BallSetup();
         }
 
         /// <summary>

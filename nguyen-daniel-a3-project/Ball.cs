@@ -11,10 +11,15 @@ namespace MohawkGame2D
         int veloX = 0;
         int veloY = 0;
         Vector2 initPos;
+        Vector2 position;
         Vector2 velocity = Vector2.Zero;
 
-        public Ball()
+        //due to sequencing issues with initPos and position, i can't use a constructor and splitting things up too much makes it a headache
+        public void BallSetup()
         {
+            initPos = new Vector2(Window.Width / 2, Window.Height / 2);
+            position = initPos;
+
             bool upOrDown = Random.Bool();
             bool rightOrLeft= Random.Bool();
             
@@ -37,11 +42,11 @@ namespace MohawkGame2D
             velocity = new Vector2(veloX, veloY);
         }
 
+        //initial position needs to go in here so it gets the proper window width and height after the game has been setup
         public void Balling()
         {
-            initPos = new Vector2(Window.Width / 2, Window.Height / 2);
-            Draw.Circle(initPos, 5);
-            initPos += velocity;
+            Draw.Circle(position, 5);
+            position += velocity;
         }
     }
 }
