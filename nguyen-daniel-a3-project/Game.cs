@@ -1,4 +1,5 @@
 ﻿// Include the namespaces (code libraries) you need below.
+using nguyen_daniel_a3_project;
 using System;
 using System.Drawing;
 using System.Numerics;
@@ -12,10 +13,10 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-        Ball ball = new Ball();
-        Paddle paddle1 = new Paddle();
-        Paddle paddle2 = new Paddle();
-        Vector2 score = Vector2.Zero;
+        public Ball ball = new Ball();
+        public Paddle paddle1 = new Paddle();
+        public Paddle paddle2 = new Paddle();
+        public Score score = new Score();
 
         /// <summary>
         ///     Setup runs once before the game loop begins.
@@ -32,29 +33,6 @@ namespace MohawkGame2D
             paddle1.PaddleSetup();
             paddle2.firstPaddle = false;
             paddle2.PaddleSetup();
-        }
-
-        public Vector2 Scoring()
-        {
-            Text.Draw($"{score.X}", Window.Width / 3, Window.Height / 8);
-            Text.Draw($"{score.Y}", Window.Width / 3 * 2, Window.Height / 8);
-
-            if (ball.position.X + ball.radius <= Window.Width / Window.Width - 1)
-            {
-                ball.BallSetup();
-                score.Y++;
-                return score;
-            }
-            if (ball.position.X - ball.radius >= Window.Width)
-            {
-                ball.BallSetup();
-                score.X++;
-                return score;
-            }
-            else
-            {
-                return score;
-            }
         }
 
         public bool Paddle1Collision()
@@ -80,9 +58,11 @@ namespace MohawkGame2D
         public void Update()
         {
             Window.ClearBackground(Color.Black);
+
             ball.Balling();
             paddle1.Paddling();
             paddle2.Paddling();
+
             if (Paddle1Collision() == true)
             {
                 ball.velocity.X *= -1;
@@ -91,7 +71,18 @@ namespace MohawkGame2D
             {
                 ball.velocity.X *= -1;
             }
-            Scoring();
+            if (ball.position.X + ball.radius <= Window.Width / Window.Width - 1)
+            {
+                ball.BallSetup();
+                score.score.Y++;
+            }
+            if (ball.position.X - ball.radius >= Window.Width)
+            {
+                ball.BallSetup();
+                score.score.X++;
+            }
+
+            score.DrawScoreText();
         }
     }
 
