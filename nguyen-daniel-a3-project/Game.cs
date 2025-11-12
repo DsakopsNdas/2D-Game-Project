@@ -1,5 +1,6 @@
 ﻿// Include the namespaces (code libraries) you need below.
 using System;
+using System.Drawing;
 using System.Numerics;
 
 // The namespace your code is in.
@@ -25,7 +26,7 @@ namespace MohawkGame2D
             Window.SetSize(600, 400);
             Window.TargetFPS = 60;
             Draw.FillColor = Color.White;
-            Draw.LineColor = Color.Clear;
+            Draw.LineColor = Color.White;
             Text.Color = Color.White;
             ball.BallSetup();
             paddle1.PaddleSetup();
@@ -56,10 +57,21 @@ namespace MohawkGame2D
             }
         }
 
-        public bool PaddleCollision()
+        public bool Paddle1Collision()
         {
-            bool collided = false;
-            return collided;
+            bool paddle1SideCollided = paddle1.cornerPositions[2] > ball.position.X - ball.radius;
+            bool paddle1LowerThanTopPoint = ball.position.Y > paddle1.cornerPositions[1];
+            bool paddle1HigherThanBottomPoint = ball.position.Y < paddle1.cornerPositions[5];
+            bool paddle1Collided = paddle1SideCollided && paddle1LowerThanTopPoint && paddle1HigherThanBottomPoint;
+            return paddle1Collided;
+        }
+        public bool Paddle2Collision()
+        {
+            bool paddle2SideCollided = paddle2.cornerPositions[2] < ball.position.X + ball.radius;
+            bool paddle2LowerThanTopPoint = ball.position.Y > paddle2.cornerPositions[1];
+            bool paddle2HigherThanBottomPoint = ball.position.Y < paddle2.cornerPositions[5];
+            bool paddle2Collided = paddle2SideCollided && paddle2LowerThanTopPoint && paddle2HigherThanBottomPoint;
+            return paddle2Collided;
         }
 
         /// <summary>
@@ -71,6 +83,14 @@ namespace MohawkGame2D
             ball.Balling();
             paddle1.Paddling();
             paddle2.Paddling();
+            if (Paddle1Collision() == true)
+            {
+                ball.velocity.X *= -1;
+            }
+            if (Paddle2Collision() == true)
+            {
+                ball.velocity.X *= -1;
+            }
             Scoring();
         }
     }

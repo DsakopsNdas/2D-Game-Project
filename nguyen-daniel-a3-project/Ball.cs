@@ -9,7 +9,7 @@ namespace MohawkGame2D
         //variables
         Vector2 initPos;
         public Vector2 position;
-        Vector2 velocity = Vector2.Zero;
+        public Vector2 velocity = Vector2.Zero;
         public int radius;
 
         //due to sequencing issues with initPos and position, i can't use a constructor and splitting things up too much makes it a headache
