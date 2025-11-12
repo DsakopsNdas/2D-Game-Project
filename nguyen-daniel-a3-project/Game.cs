@@ -70,6 +70,7 @@ namespace MohawkGame2D
             Window.ClearBackground(Color.Black);
             ball.Balling();
             paddle1.Paddling();
+            paddle2.Paddling();
             Scoring();
         }
     }

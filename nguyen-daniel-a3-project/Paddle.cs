@@ -6,7 +6,7 @@ namespace MohawkGame2D
 
 	public class Paddle
 	{
-		public float[] cornerPositions = new float[4];
+		public float[] cornerPositions = new float[7];
 		public bool firstPaddle = true;
 		int velocity = 0;
 		
@@ -26,10 +26,10 @@ namespace MohawkGame2D
 			{
                 cornerPositions = 
 					[
-					Window.Width / 8 * -1 + Window.Width / 2, Window.Height / 4, //top left corner
-					Window.Width / 8 * 2 * -1 + Window.Width / 2, Window.Height / 4 * 2, //top right corner
-                    Window.Width / 8 * -1 + Window.Width / 2, Window.Height / 4, //bottom right corner
-                    Window.Width / 8 * 2 * -1 + Window.Width / 2, Window.Height / 4 * 2, //bottom left corner
+					Window.Width / 8 * -1 + Window.Width, Window.Height / 7 * 3, //top left corner
+					Window.Width / 8 * 1.1f * -1 + Window.Width, Window.Height / 7 * 3, //top right corner
+                    Window.Width / 8 * 1.1f * -1 + Window.Width, Window.Height / 7 * 4, //bottom right corner
+                    Window.Width / 8 * -1 + Window.Width, Window.Height / 7 * 4, //bottom left corner
                     ];
             }
 		}
@@ -44,21 +44,37 @@ namespace MohawkGame2D
 
 			if (firstPaddle == true)
 			{
-				if (Input.IsKeyboardKeyDown(KeyboardInput.S))
+				if (Input.IsKeyboardKeyDown(KeyboardInput.S) && cornerPositions[5] < Window.Height)
 				{
-					velocity = 1;
+					velocity = 2;
 				}
-				else if (Input.IsKeyboardKeyDown(KeyboardInput.W))
+				else if (Input.IsKeyboardKeyDown(KeyboardInput.W) && cornerPositions[1] > 0)
 				{
-					velocity = -1;
+					velocity = -2;
 				}
 				else
 				{
 					velocity = 0;
 				}
 			}
+			else if (firstPaddle == false)
+			{
+                if (Input.IsKeyboardKeyDown(KeyboardInput.Down) && cornerPositions[5] < Window.Height)
+                {
+                    velocity = 2;
+                }
+                else if (Input.IsKeyboardKeyDown(KeyboardInput.Up) && cornerPositions[1] > 0)
+                {
+                    velocity = -2;
+                }
+                else
+                {
+                    velocity = 0;
+                }
+            }
 
-			cornerPositions[1] += velocity;
+
+            cornerPositions[1] += velocity;
             cornerPositions[3] += velocity;
             cornerPositions[5] += velocity;
             cornerPositions[7] += velocity;

@@ -47,7 +47,7 @@ namespace MohawkGame2D
             position += velocity;
             Draw.Circle(position, radius);
 
-            if (position.Y - radius <= Window.Height / Window.Height - 1)
+            if (position.Y - radius <= 0)
             {
                 velocity.Y *= -1;
             }
