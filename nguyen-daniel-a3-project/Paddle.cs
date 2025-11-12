@@ -8,6 +8,7 @@ namespace MohawkGame2D
 	{
 		public float[] cornerPositions = new float[4];
 		public bool firstPaddle = true;
+		int velocity = 0;
 		
 		public void PaddleSetup()
 		{
@@ -15,10 +16,10 @@ namespace MohawkGame2D
 			{
 				cornerPositions =
 					[
-					Window.Width / 8, Window.Height / 4, //top left corner
-					Window.Width / 8 * 2, Window.Height / 4 * 2, //top right corner
-					Window.Width / 8 * 2, Window.Height / 4 * 2, //bottom right corner
-					Window.Width / 8 * 2, Window.Height / 4 * 2, //bottom left corner
+					Window.Width / 8, Window.Height / 7 * 3, //top left corner
+					Window.Width / 8 * 1.1f, Window.Height / 7 * 3, //top right corner
+					Window.Width / 8 * 1.1f, Window.Height / 7 * 4, //bottom right corner
+					Window.Width / 8, Window.Height / 7 * 4, //bottom left corner
 					];
 			}
 			else if (firstPaddle == false)
@@ -34,8 +35,33 @@ namespace MohawkGame2D
 		}
 		public void Paddling()
 		{
-			//Draw.Quad(cornerPositions[1], cornerPositions[2], cornerPositions[3], cornerPositions[4]);
+			Draw.Quad(
+				cornerPositions[0], cornerPositions[1], 
+				cornerPositions[2], cornerPositions[3],
+                cornerPositions[4], cornerPositions[5], 
+				cornerPositions[6], cornerPositions[7]
+				);
 
+			if (firstPaddle == true)
+			{
+				if (Input.IsKeyboardKeyDown(KeyboardInput.S))
+				{
+					velocity = 1;
+				}
+				else if (Input.IsKeyboardKeyDown(KeyboardInput.W))
+				{
+					velocity = -1;
+				}
+				else
+				{
+					velocity = 0;
+				}
+			}
+
+			cornerPositions[1] += velocity;
+            cornerPositions[3] += velocity;
+            cornerPositions[5] += velocity;
+            cornerPositions[7] += velocity;
         }
 	}
 }

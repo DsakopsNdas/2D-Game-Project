@@ -28,6 +28,9 @@ namespace MohawkGame2D
             Draw.LineColor = Color.Clear;
             Text.Color = Color.White;
             ball.BallSetup();
+            paddle1.PaddleSetup();
+            paddle2.firstPaddle = false;
+            paddle2.PaddleSetup();
         }
 
         public Vector2 Scoring()
@@ -66,6 +69,7 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.Black);
             ball.Balling();
+            paddle1.Paddling();
             Scoring();
         }
     }
