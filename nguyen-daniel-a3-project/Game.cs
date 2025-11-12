@@ -13,7 +13,7 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-        public Ball ball = new Ball();
+        public Ball[] ball = new Ball[10];
         public Paddle paddle1 = new Paddle();
         public Paddle paddle2 = new Paddle();
         public Score score = new Score();
@@ -29,7 +29,7 @@ namespace MohawkGame2D
             Draw.FillColor = Color.White;
             Draw.LineColor = Color.White;
             Text.Color = Color.White;
-            ball.BallSetup();
+            ball[1].BallSetup();
             paddle1.PaddleSetup();
             paddle2.firstPaddle = false;
             paddle2.PaddleSetup();
@@ -37,17 +37,17 @@ namespace MohawkGame2D
 
         public bool Paddle1Collision()
         {
-            bool paddle1SideCollided = paddle1.cornerPositions[2] > ball.position.X - ball.radius;
-            bool paddle1LowerThanTopPoint = ball.position.Y > paddle1.cornerPositions[1];
-            bool paddle1HigherThanBottomPoint = ball.position.Y < paddle1.cornerPositions[5];
+            bool paddle1SideCollided = paddle1.cornerPositions[2] > ball[1].position.X - ball[1].radius;
+            bool paddle1LowerThanTopPoint = ball[1].position.Y > paddle1.cornerPositions[1];
+            bool paddle1HigherThanBottomPoint = ball[1].position.Y < paddle1.cornerPositions[5];
             bool paddle1Collided = paddle1SideCollided && paddle1LowerThanTopPoint && paddle1HigherThanBottomPoint;
             return paddle1Collided;
         }
         public bool Paddle2Collision()
         {
-            bool paddle2SideCollided = paddle2.cornerPositions[2] < ball.position.X + ball.radius;
-            bool paddle2LowerThanTopPoint = ball.position.Y > paddle2.cornerPositions[1];
-            bool paddle2HigherThanBottomPoint = ball.position.Y < paddle2.cornerPositions[5];
+            bool paddle2SideCollided = paddle2.cornerPositions[2] < ball[1].position.X + ball[1].radius;
+            bool paddle2LowerThanTopPoint = ball[1].position.Y > paddle2.cornerPositions[1];
+            bool paddle2HigherThanBottomPoint = ball[1].position.Y < paddle2.cornerPositions[5];
             bool paddle2Collided = paddle2SideCollided && paddle2LowerThanTopPoint && paddle2HigherThanBottomPoint;
             return paddle2Collided;
         }
@@ -59,26 +59,26 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.Black);
 
-            ball.Balling();
+            ball[1].Balling();
             paddle1.Paddling();
             paddle2.Paddling();
 
             if (Paddle1Collision() == true)
             {
-                ball.velocity.X *= -1;
+                ball[1].velocity.X *= -1;
             }
             if (Paddle2Collision() == true)
             {
-                ball.velocity.X *= -1;
+                ball[1].velocity.X *= -1;
             }
-            if (ball.position.X + ball.radius <= Window.Width / Window.Width - 1)
+            if (ball[1].position.X + ball[1].radius <= Window.Width / Window.Width - 1)
             {
-                ball.BallSetup();
+                ball[1].BallSetup();
                 score.score.Y++;
             }
-            if (ball.position.X - ball.radius >= Window.Width)
+            if (ball[1].position.X - ball[1].radius >= Window.Width)
             {
-                ball.BallSetup();
+                ball[1].BallSetup();
                 score.score.X++;
             }
 
