@@ -25,11 +25,11 @@ namespace MohawkGame2D
 
             if (upOrDown == true)
             {
-                velocity.Y = 1;
+                velocity.Y = Random.Float(0, 1.5f);
             }
             else
             {
-                velocity.Y = -1;
+                velocity.Y = Random.Float(-1.5f, 0);
             }
             if (rightOrLeft == true)
             {
