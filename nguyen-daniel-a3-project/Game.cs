@@ -13,7 +13,7 @@ namespace MohawkGame2D
     public class Game
     {
         // Place your variables here:
-        public Ball[] balls;
+        public Ball[] balls = new Ball[10];
         public Paddle paddle1 = new Paddle();
         public Paddle paddle2 = new Paddle();
         public Score score = new Score();
